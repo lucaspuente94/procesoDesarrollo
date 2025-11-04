@@ -3,7 +3,7 @@ package com.proceso.desarrollo.entity;
 import java.time.LocalDate;
 import java.util.List;
 
-import com.proceso.desarrollo.domain.enums.NivelDificultad;
+import com.proceso.desarrollo.enums.NivelDificultad;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;

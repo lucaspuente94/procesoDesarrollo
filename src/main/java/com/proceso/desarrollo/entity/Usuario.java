@@ -2,7 +2,7 @@ package com.proceso.desarrollo.entity;
 
 import java.time.LocalDate;
 
-import com.proceso.desarrollo.domain.enums.Rol;
+import com.proceso.desarrollo.enums.Rol;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

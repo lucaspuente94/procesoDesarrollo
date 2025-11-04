@@ -1,6 +1,6 @@
 package com.proceso.desarrollo.entity;
 
-import com.proceso.desarrollo.domain.enums.Rareza;
+import com.proceso.desarrollo.enums.Rareza;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -39,10 +39,10 @@ public class Figurita {
 	@Column(name = "img_url", columnDefinition = "LONGBLOB", nullable = false)
 	private byte[] image;
 
-	public Figurita(String nombre, String numero, Rareza rareza, int stockTotal, int stockDisponible, byte[] image) {
+	public Figurita(Long id, String nombre, String numero, int stockTotal, int stockDisponible, byte[] image) {
+		this.id = id;
 		this.nombre = nombre;
 		this.numero = numero;
-		this.rareza = rareza;
 		this.stockTotal = stockTotal;
 		this.stockDisponible = stockDisponible;
 		this.image = image;

@@ -2,7 +2,6 @@ package com.proceso.desarrollo.service.impl;
 
 import java.util.List;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import com.proceso.desarrollo.entity.Figurita;
@@ -32,7 +31,7 @@ public class FiguritaService implements IFiguritaService {
 	public List<Figurita> crearFigurita(List<Figurita> figurita) {
 		try {
 			return figuritaRepository.saveAll(figurita.stream().map(FactoryFigurita::crearFigurita).toList());
-		} catch (Exception e) {
+		} catch (RepositoryException e) {
 			throw new RepositoryException("Error al crear las figuritas", e.getMessage());
 		}
 	}
@@ -53,11 +52,15 @@ public class FiguritaService implements IFiguritaService {
 	public List<Figurita> modificarFigurita(List<Figurita> figuritas) {
 		try {
 			return figuritas.stream().map(figurita -> {
-				Figurita actual = figuritaRepository.findByNombre(figurita.getNombre()).orElseThrow(
+				Figurita actual = figuritaRepository.findById(figurita.getId()).orElseThrow(
 						() -> new RepositoryException("No se encontro la figurita con nombre " + figurita.getNombre(),
 								"404"));
-				BeanUtils.copyProperties(figurita, actual, "id");
-				return figuritaRepository.save(FactoryFigurita.crearFigurita(actual));
+
+				actual.setNombre(figurita.getNombre());
+				actual.setNumero(figurita.getNumero());
+				actual.setImage(figurita.getImage());
+
+				return figuritaRepository.save(actual);
 			}).toList();
 		} catch (Exception e) {
 			throw new RepositoryException("Error al modificar las figuritas", e.getMessage());

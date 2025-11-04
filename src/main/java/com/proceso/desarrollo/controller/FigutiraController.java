@@ -71,10 +71,11 @@ public class FigutiraController {
 		return ResponseEntity.ok().body(Map.of("mensaje", "Figurita eliminada correctamente", "id", id));
 	}
 
-
 	private List<FiguritaDTO> converToDTO(List<Figurita> figuritaEntity) {
-		return figuritaEntity.stream().map(figurita -> new FiguritaDTO(figurita.getNombre(), figurita.getNumero(),
-				figurita.getRareza(), figurita.getStockTotal(), figurita.getStockDisponible(), figurita.getImage()))
+		return figuritaEntity.stream()
+				.map(figurita -> new FiguritaDTO(figurita.getId(), figurita.getNombre(), figurita.getNumero(),
+						figurita.getStockTotal(), figurita.getRareza(), figurita.getStockDisponible(),
+						figurita.getImage()))
 				.toList();
 	}
 
@@ -83,7 +84,7 @@ public class FigutiraController {
 			if (UtilImage.isValidImage(dto.image())) {
 				throw new IllegalArgumentException("La imagen no es valida");
 			}
-			return new Figurita(dto.nombre(), dto.numero(), dto.rareza(), dto.stockTotal(), dto.stockDisponible(),
+			return new Figurita(dto.id(), dto.nombre(), dto.numero(), dto.stockTotal(), dto.stockDisponible(),
 					dto.image());
 		}).toList();
 
