@@ -1,7 +1,7 @@
 package com.proceso.desarrollo.strategy;
 
-import com.proceso.desarrollo.domain.enums.Rareza;
 import com.proceso.desarrollo.entity.Figurita;
+import com.proceso.desarrollo.enums.Rareza;
 
 public class Epica implements IEstrategyAsignacion {
 
@@ -9,15 +9,18 @@ public class Epica implements IEstrategyAsignacion {
 	private final int max = 25;
 
 	@Override
-	public boolean elegir(Figurita figurita) {
-		return figurita.getStockTotal() >= min && figurita.getStockTotal() <= max;
+	public void asignarRareza(Figurita figurita) {
+		figurita.setRareza(Rareza.EPICA);
 	}
 
 	@Override
-	public void asignarRareza(Figurita figurita) {
-		if (figurita.getStockTotal() >= min && figurita.getStockTotal() <= max) {
-			figurita.setRareza(Rareza.EPICA);
-		}
+	public int getMinimo() {
+		return min;
+	}
+
+	@Override
+	public int getMaximo() {
+		return max;
 	}
 
 }

@@ -1,7 +1,7 @@
 package com.proceso.desarrollo.strategy;
 
-import com.proceso.desarrollo.domain.enums.Rareza;
 import com.proceso.desarrollo.entity.Figurita;
+import com.proceso.desarrollo.enums.Rareza;
 
 public class Rara implements IEstrategyAsignacion {
 
@@ -9,14 +9,18 @@ public class Rara implements IEstrategyAsignacion {
 	private final int max = 100;
 
 	@Override
-	public boolean elegir(Figurita figurita) {
-		return figurita.getStockTotal() >= min && figurita.getStockTotal() <= max;
+	public void asignarRareza(Figurita figurita) {
+		figurita.setRareza(Rareza.RARA);
+
 	}
 
 	@Override
-	public void asignarRareza(Figurita figurita) {
-		if (figurita.getStockTotal() >= min && figurita.getStockTotal() <= max) {
-			figurita.setRareza(Rareza.RARA);
-		}
+	public int getMinimo() {
+		return min;
+	}
+
+	@Override
+	public int getMaximo() {
+		return max;
 	}
 }
