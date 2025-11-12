@@ -1,0 +1,108 @@
+{
+	"info": {
+		"_postman_id": "558a1364-b7fb-4d5b-9c5b-d0aef6f67ffd",
+		"name": "Figurita",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "4327984",
+		"_collection_link": "https://bold-meteor-704040.postman.co/workspace/Proceso-de-desarrollo~93cee5ff-b794-4516-acac-c13e1cf5dcc9/collection/4327984-558a1364-b7fb-4d5b-9c5b-d0aef6f67ffd?action=share&source=collection_link&creator=4327984"
+	},
+	"item": [
+		{
+			"name": "figuritas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/figuritas/listar",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"figuritas",
+						"listar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "crear",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"nombre\": \"Lionel Messi\",\n        \"numero\": \"10\",\n        \"image\": \"iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAJElEQVQYV2NkQAN/Gf4b4T8GpgYGBhA1IhEkAhC0wZgAAgwA5Q8F/QozXHMAAAAASUVORK5CYII=\"\n    },\n    {\n        \"nombre\": \"Kylian Mbappé\",\n        \"numero\": \"7\",\n        \"image\": \"iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAJElEQVQYV2NkQAN/Gf4b4T8GpgYGBhA1IhEkAhC0wZgAAgwA5Q8F/QozXHMAAAAASUVORK5CYII=\"\n    },\n    {\n        \"nombre\": \"Rodrigo De Paul\",\n        \"numero\": \"5\",\n        \"image\": \"iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAJElEQVQYV2NkQAN/Gf4b4T8GpgYGBhA1IhEkAhC0wZgAAgwA5Q8F/QozXHMAAAAASUVORK5CYII=\"\n    }\n]"
+				},
+				"url": {
+					"raw": "http://localhost:8080/figuritas/crear",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"figuritas",
+						"crear"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "eliminar",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/figuritas/eliminar/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"figuritas",
+						"eliminar",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "modificar",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[ \n    {\n        \"id\": 1,\n        \"nombre\": \"qqq Messi\",\n        \"numero\": \"11111111\",\n        \"image\": \"iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAJElEQVQYV2NkQAN/Gf4b4T8GpgYGBhA1IhEkAhC0wZgAAgwA5Q8F/QozXHMAAAAASUVORK5CYII=\"\n    }\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/figuritas/modificar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"figuritas",
+						"modificar"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

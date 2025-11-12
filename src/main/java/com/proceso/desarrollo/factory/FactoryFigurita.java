@@ -17,14 +17,6 @@ public class FactoryFigurita {
 		Random random = new Random();
 		IEstrategyAsignacion estrategia = estrategias.get(random.nextInt(estrategias.size()));
 		estrategia.asignarRareza(figurita);
-
-		// se le suma el minimo para que este dentro de ese rango como minimo
-		int stockTotal = random.nextInt(estrategia.getMaximo() - estrategia.getMinimo() + 1) + estrategia.getMinimo();
-
-		// se asegura que el stock disponible sea al menos la mitad del stock total
-		int stockDisponible = random.nextInt(stockTotal / 2) + (stockTotal / 2);
-		figurita.setStockTotal(stockTotal);
-		figurita.setStockDisponible(stockDisponible);
 		return figurita;
 	}
 
