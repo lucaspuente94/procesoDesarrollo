@@ -1,0 +1,191 @@
+{
+	"info": {
+		"_postman_id": "a94b5902-e223-472f-9af2-be5991743160",
+		"name": "Album",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13369840"
+	},
+	"item": [
+		{
+			"name": "Listar",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/albums/listar",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"albums",
+						"listar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n      \"titulo\": \"Album Mundial 2026\",\n      \"descripcion\": \"Edición básica\",\n      \"publicado\": false,\n      \"fechaCreacion\": \"2025-11-03\",\n      \"totalFiguritas\": 660\n    },\n    {\n      \"titulo\": \"Album Edición Especial\",\n      \"descripcion\": \"Edición limitada con ilustraciones\",\n      \"publicado\": true,\n      \"fechaCreacion\": \"2025-10-01\",\n      \"totalFiguritas\": 120\n    }\n  ]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/albums/crear",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"albums",
+						"crear"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modificar",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"id\": 3,\n        \"titulo\": \"Album Mundial 2027\",\n        \"descripcion\": \"Edición básica\",\n        \"publicado\": false,\n        \"fechaCreacion\": \"2025-11-03\",\n        \"totalFiguritas\": 700\n    }\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/albums/modificar",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"albums",
+						"modificar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/albums/eliminar/4",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"albums",
+						"eliminar",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar secciones",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/albums/secciones/1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"albums",
+						"secciones",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Agregar Secciones",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombre\": \"Argentina\",\n    \"secciones\": [\n        {\n            \"nombre\": \"Especiales\",\n            \"figuritas\":[1]\n        },\n        {\n            \"nombre\": \"Arqueros\"\n        },\n        {\n            \"nombre\": \"Defensores\"\n        },\n        {\n            \"nombre\": \"Volantes\"\n        },\n        {\n            \"nombre\": \"Delanteros\"\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/albums/secciones/1/1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"albums",
+						"secciones",
+						"1",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar Seccion",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/albums/secciones/1/8",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"albums",
+						"secciones",
+						"1",
+						"8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Agregar Figurita a Seccion",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/albums/secciones/1/7/figuritas/3",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"albums",
+						"secciones",
+						"1",
+						"7",
+						"figuritas",
+						"3"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -2,8 +2,8 @@ package com.proceso.desarrollo.service;
 
 import java.util.List;
 
+import com.proceso.desarrollo.dto.SeccionDTO;
 import com.proceso.desarrollo.entity.Album;
-import com.proceso.desarrollo.entity.SeccionCompuesta;
 
 public interface IAlbumService {
 
@@ -15,6 +15,13 @@ public interface IAlbumService {
 
 	void eliminarAlbum(Long id);
 
-	Album agregarSecciones(Long albumId, SeccionCompuesta seccionRaiz);
+	Album agregarSecciones(Long albumId, Long seccionPadreId, SeccionDTO seccion);
 
+	SeccionDTO obtenerSecciones(Long albumId);
+	
+	void eliminarSeccion(Long albumId, Long seccionId);
+
+	void agregarFiguritaASeccion(Long albumId, Long seccionSimpleId, Long figuritaId);
+	
+	void eliminarFiguritaDeSeccion(Long albumId, Long seccionSimpleId, Long figuritaId);
 }

@@ -14,4 +14,6 @@ public interface IFiguritaService {
 
 	List<Figurita> modificarFigurita(List<Figurita> converToEntity);
 
+	Figurita findById(Long id);
+
 }

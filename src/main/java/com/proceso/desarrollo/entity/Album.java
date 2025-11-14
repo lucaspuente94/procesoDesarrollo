@@ -1,7 +1,6 @@
 package com.proceso.desarrollo.entity;
 
 import java.time.LocalDate;
-import java.util.List;
 
 import com.proceso.desarrollo.enums.NivelDificultad;
 
@@ -13,7 +12,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -46,13 +44,8 @@ public class Album {
 
 	private LocalDate fecha_creacion;
 
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "album_id")
-	private List<Figurita> figuritas;
-
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "seccion_raiz_id")
-	private SeccionCompuesta seccionRaiz;
-
-
+	private Seccion seccionRaiz;
+	
 }

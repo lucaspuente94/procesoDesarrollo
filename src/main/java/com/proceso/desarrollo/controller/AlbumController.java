@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.proceso.desarrollo.dto.AlbumDTO;
+import com.proceso.desarrollo.dto.SeccionDTO;
 import com.proceso.desarrollo.entity.Album;
-import com.proceso.desarrollo.entity.SeccionCompuesta;
 import com.proceso.desarrollo.service.IAlbumService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -70,21 +70,57 @@ public class AlbumController {
 		albumService.eliminarAlbum(id);
 		return ResponseEntity.ok(Map.of("mensaje", "Album eliminado correctamente", "id", id));
 	}
-
+	
+	@Operation(summary = "Obtener secciones de un álbum", description = "Devuelve la estructura jerárquica de secciones de un álbum específico.", responses = {
+			@ApiResponse(responseCode = "200", description = "Secciones obtenidas correctamente", content = @Content(mediaType = "application/json", schema = @Schema(implementation = SeccionDTO.class))),
+			@ApiResponse(responseCode = "404", description = "Álbum no encontrado"),
+			@ApiResponse(responseCode = "500", description = "Error interno del servidor") })
+	@GetMapping("/secciones/{albumId}")
+	public ResponseEntity<SeccionDTO> obtenerSecciones(@PathVariable Long albumId) {
+		return ResponseEntity.ok(albumService.obtenerSecciones(albumId));
+	}
+	
 	@Operation(summary = "Agregar secciones a un álbum", description = "Permite crear una o varias secciones (simples o compuestas) dentro de un álbum existente.", requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Estructura jerárquica de secciones a agregar", required = true, content = @Content(mediaType = "application/json")), responses = {
 			@ApiResponse(responseCode = "201", description = "Sección(es) creada(s) correctamente", content = @Content(mediaType = "application/json")),
 			@ApiResponse(responseCode = "404", description = "Álbum no encontrado"),
 			@ApiResponse(responseCode = "500", description = "Error interno del servidor") })
-
-	@PostMapping("/{albumId}/secciones")
-	public ResponseEntity<Object> agregarSecciones(@PathVariable Long albumId,
-			@RequestBody SeccionCompuesta seccionRaiz) {
-		return ResponseEntity.status(HttpStatus.CREATED).body(albumService.agregarSecciones(albumId, seccionRaiz));
+	@PostMapping("/secciones/{albumId}/{seccionPadreId}")
+	public ResponseEntity<Object> agregarSecciones(@PathVariable Long albumId,@PathVariable Long seccionPadreId,
+			@RequestBody SeccionDTO seccion) {
+		return ResponseEntity.status(HttpStatus.CREATED).body(albumService.agregarSecciones(albumId,seccionPadreId,seccion));
+	}
+	
+	@Operation(summary = "Eliminar sección de un álbum", description = "Elimina una sección específica de un álbum.", responses = {
+			@ApiResponse(responseCode = "200", description = "Sección eliminada correctamente", content = @Content(mediaType = "application/json")),
+			@ApiResponse(responseCode = "404", description = "Álbum o sección no encontrado"),
+			@ApiResponse(responseCode = "500", description = "Error interno del servidor") })
+	@DeleteMapping("/secciones/{albumId}/{seccionId}")
+	public ResponseEntity<Object> eliminarSeccion(@PathVariable Long albumId,@PathVariable Long seccionId) {
+		albumService.eliminarSeccion(albumId, seccionId);
+		return ResponseEntity.ok(Map.of("mensaje", "Sección eliminada correctamente", "seccionId", seccionId));
+	}
+	
+	@Operation(summary = "Agregar figurita a sección simple", description = "Agrega una figurita a una sección simple dentro de un álbum.", responses = {
+			@ApiResponse(responseCode = "200", description = "Figurita agregada correctamente", content = @Content(mediaType = "application/json")),
+			@ApiResponse(responseCode = "404", description = "Álbum o sección no encontrado"),
+			@ApiResponse(responseCode = "500", description = "Error interno del servidor") })
+	@PostMapping("/secciones/{albumId}/{seccionSimpleId}/figuritas/{figuritaId}")
+	public ResponseEntity<Object> agregarFiguritaASeccion(@PathVariable Long albumId,
+			@PathVariable Long seccionSimpleId, @PathVariable Long figuritaId ) {
+		albumService.agregarFiguritaASeccion(albumId, seccionSimpleId, figuritaId);
+		return ResponseEntity.ok(Map.of("mensaje", "Figurita agregada correctamente", "figuritaId", figuritaId));
+	}
+	
+	@DeleteMapping("/secciones/{albumId}/{seccionSimpleId}/figuritas/{figuritaId}")
+	public ResponseEntity<Object> eliminarFiguritaDeSeccionSimple(@PathVariable Long albumId ,
+			@PathVariable Long seccionSimpleId, @PathVariable Long figuritaId ) {
+		albumService.eliminarFiguritaDeSeccion(albumId, seccionSimpleId, figuritaId);
+		return ResponseEntity.ok(Map.of("mensaje", "Figurita eliminada correctamente", "figuritaId", figuritaId));
 	}
 
 	private List<AlbumDTO> convertToDTO(List<Album> albumEntity) {
 		return albumEntity.stream().map(album -> new AlbumDTO(album.getId(), album.getTitulo(), album.getDescripcion(),
-				album.isPublicado(), album.getFecha_creacion(), album.getTotal_figuritas())).toList();
+				album.isPublicado(), album.getFecha_creacion(), album.getTotal_figuritas(), album.getSeccionRaiz()  )).toList();
 	}
 
 	private List<Album> convertToEntity(List<AlbumDTO> albumDTO) {

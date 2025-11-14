@@ -66,5 +66,15 @@ public class FiguritaService implements IFiguritaService {
 			throw new RepositoryException("Error al modificar las figuritas", e.getMessage());
 		}
 	}
+	
+	@Override
+	public Figurita findById(Long id) {
+		try {
+			return figuritaRepository.findById(id)
+					.orElseThrow(() -> new RepositoryException("No se encontró la figurita con ID " + id, "404"));
+		} catch (Exception e) {
+			throw new RepositoryException("Error al buscar la figurita", e.getMessage());
+		}
+	}
 
 }
